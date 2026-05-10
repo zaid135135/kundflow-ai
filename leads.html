@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<title>KundFlow AI - Leads</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  font-family: Arial;
+  background: #0f172a;
+  color: white;
+  margin: 0;
+  padding: 20px;
+}
+
+.container {
+  max-width: 800px;
+  margin: auto;
+}
+
+h1 {
+  text-align: center;
+}
+
+input, select {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: none;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background: #22c55e;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.card {
+  background: #1e293b;
+  padding: 15px;
+  margin-top: 15px;
+  border-radius: 10px;
+}
+
+a {
+  color: #38bdf8;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Lead Machine - KundFlow AI</h1>
+
+<p>Generera kunder direkt genom att skapa sökningar automatiskt.</p>
+
+<input id="city" placeholder="Stad (ex: Stockholm)">
+<input id="niche" placeholder="Nisch (ex: bilverkstad)">
+
+<button onclick="generate()">Generera leads</button>
+
+<div id="results"></div>
+
+</div>
+
+<script>
+function generate() {
+  let city = document.getElementById("city").value;
+  let niche = document.getElementById("niche").value;
+
+  let queries = [
+    niche + " " + city,
+    niche + " företag " + city,
+    "bästa " + niche + " " + city,
+    niche + " kontakt " + city
+  ];
+
+  let output = "";
+
+  queries.forEach(q => {
+    let url = "https://www.google.com/search?q=" + encodeURIComponent(q);
+
+    output += `
+      <div class="card">
+        <p><b>Sökning:</b> ${q}</p>
+        <a href="${url}" target="_blank">Öppna Google leads</a>
+      </div>
+    `;
+  });
+
+  document.getElementById("results").innerHTML = output;
+}
+</script>
+
+</body>
+</html>
